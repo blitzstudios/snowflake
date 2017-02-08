@@ -31,7 +31,8 @@ defmodule Snowflake.Mixfile do
   defp deps do
     [
       {:dialyxir, "~> 0.4", only: :dev, runtime: false},
-      {:benchee, "~> 0.6", only: :dev}
+      {:benchee, "~> 0.6", only: :dev},
+      {:ex_doc, "~> 0.14", only: :dev}
     ]
   end
 

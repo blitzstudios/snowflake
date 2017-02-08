@@ -29,9 +29,6 @@ Generating an ID is simple.
 ```elixir
 Snowflake.next_id()
 # => 828746161129414660
-
-Snowflake.next_hundred_ids()
-# => [828746161129414661 .. 828746161129414761]
 ```
 
 ## Helper functions
