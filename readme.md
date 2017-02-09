@@ -1,6 +1,6 @@
 # Snowflake
 
-A distributed Snowflake generator in Elixir.
+A scalable, decentralized Snowflake generator in Elixir.
 
 ## Usage
 
