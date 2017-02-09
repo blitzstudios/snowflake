@@ -3,13 +3,17 @@ defmodule Snowflake.Utils do
   Utility functions intended for Snowflake application.
   epoch() and machine_id() are useful for inspecting in production.
   """
+  @default_config [
+    nodes: [],
+    epoch: 0
+  ]
 
   @doc """
   Grabs epoch from config value
   """
   @spec epoch() :: integer
   def epoch() do
-    Application.get_env(:snowflake, :epoch)
+    Application.get_env(:snowflake, :epoch) || @default_config[:epoch]
   end
 
   @doc """
@@ -18,8 +22,8 @@ defmodule Snowflake.Utils do
   """
   @spec machine_id() :: integer
   def machine_id() do
-    nodes = Application.get_env(:snowflake, :nodes)
-    host_addrs = [hostname(), fqdn()] ++ ip_addrs()
+    nodes = Application.get_env(:snowflake, :nodes) || @default_config[:nodes]
+    host_addrs = [hostname(), fqdn(), Node.self()] ++ ip_addrs()
 
     case MapSet.intersection(MapSet.new(host_addrs), MapSet.new(nodes)) |> Enum.take(1) do
       [matching_node] -> Enum.find_index(nodes, fn node -> node == matching_node end)

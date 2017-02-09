@@ -9,11 +9,19 @@ defmodule Snowflake.Helper do
   use Bitwise
 
   @doc """
-  Get timestamp in ms from epoch from any snowflake ID
+  Get timestamp in ms from your config epoch from any snowflake ID
   """
   @spec timestamp_of_id(integer) :: integer
   def timestamp_of_id(id) do
     id >>> 22
+  end
+
+  @doc """
+  Get timestamp from computer epoch - January 1, 1970, Midnight
+  """
+  @spec real_timestamp_of_id(integer) :: integer
+  def real_timestamp_of_id(id) do
+    timestamp_of_id(id) + Snowflake.Utils.epoch()
   end
 
   @doc """
