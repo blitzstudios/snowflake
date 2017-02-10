@@ -26,7 +26,7 @@ Specify the nodes in your config.  If you're running a cluster, specify all the 
 
 ```elixir
 config :snowflake,
-  nodes: ["127.0.0.1", "nonode@nohost"],   # up to 1023 nodes
+  nodes: ["127.0.0.1", :'nonode@nohost'],   # up to 1023 nodes
   epoch: 1142974214000  # don't change after you decide what your epoch is
 ```
 
