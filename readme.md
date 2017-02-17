@@ -8,7 +8,7 @@ In your mix.exs file:
 
 ```elixir
 def deps do
-  [{:snowflake, "~> 0.0.1"}]
+  [{:snowflake, "~> 1.0.0"}]
 end
 ```
 
@@ -26,7 +26,7 @@ Specify the nodes in your config.  If you're running a cluster, specify all the 
 
 ```elixir
 config :snowflake,
-  nodes: [127.0.0.1],   # up to 1023 nodes
+  nodes: ["127.0.0.1"],   # up to 1023 nodes
   epoch: 1142974214000  # don't change after you decide what your epoch is
 ```
 
@@ -37,7 +37,7 @@ Snowflake.next_id()
 # => {:ok, 54974240033603584}
 ```
 
-## Helper functions
+## Util functions
 
 After generating snowflake IDs, you may want to use them to do other things.
 For example, deriving a bucket number from a snowflake to use as part of a
@@ -45,26 +45,26 @@ composite key in Cassandra in the attempt to limit partition size.
 
 Lets say we want to know the current bucket for an ID that would be generated right now:
 ```elixir
-Snowflake.Helper.bucket(30, :days)
+Snowflake.Util.bucket(30, :days)
 # => 5
 ```
 
 Or if we want to know which bucket a snowflake ID should belong to, given we are
 bucketing by every 30 days.
 ```elixir
-Snowflake.Helper.bucket(30, :days, 54974240033603584)
+Snowflake.Util.bucket(30, :days, 54974240033603584)
 # => 5
 ```
 
 Or if we want to know how many ms elapsed from epoch
 ```elixir
-Snowflake.Helper.timestamp_of_id(54974240033603584)
+Snowflake.Util.timestamp_of_id(54974240033603584)
 # => 197588482172
 ```
 
 Or if we want to know how many ms elapsed from computer epoch (January 1, 1970 midnight).  We can use this to derive an actual calendar date.
 ```elixir
-Snowflake.Helper.real_timestamp_of_id(54974240033603584)
+Snowflake.Util.real_timestamp_of_id(54974240033603584)
 # => 1486669389497
 ```
 

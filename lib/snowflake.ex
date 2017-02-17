@@ -8,7 +8,7 @@ defmodule Snowflake do
     import Supervisor.Spec
 
     children = [
-      worker(Snowflake.Generator, [Snowflake.Utils.epoch(), Snowflake.Utils.machine_id()])
+      worker(Snowflake.Generator, [Snowflake.Helper.epoch(), Snowflake.Helper.machine_id()])
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one)

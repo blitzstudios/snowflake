@@ -1,5 +1,9 @@
 # Changelog
 
+## v 1.0.0
+
+- Updated API, swapped Util and Helper module names to be more standard
+
 ## v 0.0.2
 
 - added Helper.real_timestamp_of_id
