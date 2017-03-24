@@ -1,5 +1,9 @@
 # Changelog
 
+## v 1.0.1
+
+- Introduced a helpful util function to get a snowflake for a specific time.
+
 ## v 1.0.0
 
 - Updated API, swapped Util and Helper module names to be more standard
