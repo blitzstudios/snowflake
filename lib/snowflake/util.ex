@@ -10,6 +10,22 @@ defmodule Snowflake.Util do
   use Bitwise
 
   @doc """
+  First Snowflake for timestamp, useful if you have a timestamp and want
+  to find snowflakes before or after a certain millesecond
+  """
+  @spec first_snowflake_for_timestamp(integer) :: integer
+  def first_snowflake_for_timestamp(timestamp) do
+    ts = timestamp - Snowflake.Helper.epoch()
+    
+    << new_id :: unsigned-integer-size(64)>> = <<
+       ts :: unsigned-integer-size(42),
+       0 :: unsigned-integer-size(10),
+       0 :: unsigned-integer-size(12) >>
+
+    new_id
+  end
+
+  @doc """
   Get timestamp in ms from your config epoch from any snowflake ID
   """
   @spec timestamp_of_id(integer) :: integer
