@@ -1,7 +1,7 @@
 defmodule Snowflake.Mixfile do
   use Mix.Project
 
-  @version "1.0.1"
+  @version "1.0.2"
   @url "https://github.com/blitzstudios/snowflake"
   @maintainers ["Weixi Yen"]
 

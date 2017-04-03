@@ -30,6 +30,14 @@ config :snowflake,
   epoch: 1142974214000  # don't change after you decide what your epoch is
 ```
 
+Alternatively, you specify a specific machine_id
+
+```elixir
+config :snowflake,
+  machine_id: 23,   # values are 0 thru 1023 nodes
+  epoch: 1142974214000  # don't change after you decide what your epoch is
+```
+
 Generating an ID is simple.
 
 ```elixir
