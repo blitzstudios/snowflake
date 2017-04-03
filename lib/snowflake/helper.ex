@@ -22,6 +22,11 @@ defmodule Snowflake.Helper do
   """
   @spec machine_id() :: integer
   def machine_id() do
+    id = Application.get_env(:snowflake, :machine_id)
+    machine_id(id)
+  end
+
+  defp machine_id(nil) do
     nodes = Application.get_env(:snowflake, :nodes) || @default_config[:nodes]
     host_addrs = [hostname(), fqdn(), Node.self()] ++ ip_addrs()
 
@@ -30,6 +35,9 @@ defmodule Snowflake.Helper do
       _ -> 1023
     end
   end
+
+  defp machine_id(id) when id >= 0 and id < 1024, do: id
+  defp machine_id(id), do: machine_id(nil)
 
   defp ip_addrs() do
     case :inet.getifaddrs do
