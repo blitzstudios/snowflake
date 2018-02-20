@@ -10,6 +10,10 @@ defmodule Snowflake.Generator do
     GenServer.start_link(__MODULE__, state, name: __MODULE__)
   end
 
+  def init(args) do
+    {:ok, args}
+  end
+
   def handle_call(:next_id, from, {epoch, prev_ts, machine_id, seq} = state) do
     case next_ts_and_seq(epoch, prev_ts, seq) do
       {:error, :seq_overflow} ->

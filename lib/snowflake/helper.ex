@@ -37,7 +37,7 @@ defmodule Snowflake.Helper do
   end
 
   defp machine_id(id) when id >= 0 and id < 1024, do: id
-  defp machine_id(id), do: machine_id(nil)
+  defp machine_id(_id), do: machine_id(nil)
 
   defp ip_addrs() do
     case :inet.getifaddrs do
@@ -46,7 +46,8 @@ defmodule Snowflake.Helper do
         |> Enum.flat_map(fn {_, kwlist} ->
           kwlist |> Enum.filter(fn {type, _} -> type == :addr end)
         end)
-        |> Enum.filter_map(fn {_, addr} -> tuple_size(addr) in [4, 6] end, fn {_, addr} ->
+        |> Enum.filter(&(tuple_size(elem(&1, 1)) in [4, 6]))
+        |> Enum.map(fn {_, addr} ->
           case addr do
             {a, b, c, d} -> [a, b, c, d] |> Enum.join(".")              # ipv4
             {a, b, c, d, e, f} -> [a, b, c, d, e, f] |> Enum.join(":")  # ipv6

@@ -1,5 +1,9 @@
 # Changelog
 
+## v 1.0.3
+
+- Fix warnings.
+
 ## v 1.0.2
 
 - Added ability to define a specific machine_id instead of using the node list index mechanism.
