@@ -30,7 +30,7 @@ config :snowflake,
   epoch: 1142974214000  # don't change after you decide what your epoch is
 ```
 
-Alternatively, you specify a specific machine_id
+Alternatively, you can specify a specific machine_id
 
 ```elixir
 config :snowflake,
