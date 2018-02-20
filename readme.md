@@ -22,7 +22,7 @@ Specify the nodes in your config.  If you're running a cluster, specify all the 
 
 - **nodes** can be Erlang Node Names, Public IPs, Private IPs, Hostnames, or FQDNs
 - **epoch** should not be changed once you begin generating IDs and want to maintain sorting
-- There should be no more than 1 snowflake generator per node, or you risk duplicate potential duplicate snowflakes on the same node.
+- There should be no more than 1 snowflake generator per node, or you risk potential duplicate snowflakes on the same node.
 
 ```elixir
 config :snowflake,
