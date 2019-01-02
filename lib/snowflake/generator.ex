@@ -56,6 +56,6 @@ defmodule Snowflake.Generator do
   end
 
   defp ts(epoch) do
-    System.os_time(:milliseconds) - epoch
+    System.os_time(:millisecond) - epoch
   end
 end

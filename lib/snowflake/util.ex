@@ -54,7 +54,7 @@ defmodule Snowflake.Util do
   """
   @spec bucket(integer, atom) :: integer
   def bucket(units, unit_type) do
-    timestamp = System.os_time(:milliseconds) - Snowflake.Helper.epoch()
+    timestamp = System.os_time(:millisecond) - Snowflake.Helper.epoch()
     round(timestamp / bucket_size(unit_type, units))
   end
 
