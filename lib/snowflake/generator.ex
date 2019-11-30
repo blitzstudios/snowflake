@@ -49,7 +49,7 @@ defmodule Snowflake.Generator do
   defp create_id(ts, machine_id, seq) do
     << new_id :: unsigned-integer-size(64)>> = <<
        0 :: unsigned-integer-size(1),
-       ts :: unsigned-integer-size(42),
+       ts :: unsigned-integer-size(41),
        machine_id :: unsigned-integer-size(10),
        seq :: unsigned-integer-size(12) >>
 
