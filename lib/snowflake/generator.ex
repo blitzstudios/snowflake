@@ -31,6 +31,10 @@ defmodule Snowflake.Generator do
     {:reply, {:ok, machine_id}, state}
   end
 
+  def handle_call({:set_machine_id, machine_id}, _from, {epoch, prev_ts, _old_machine_id, seq}) do
+    {:reply, {:ok, machine_id}, {epoch, prev_ts, machine_id, seq}}
+  end
+
   defp next_ts_and_seq(epoch, prev_ts, seq) do
     case ts(epoch) do
       ^prev_ts ->

@@ -31,4 +31,12 @@ defmodule Snowflake do
   def machine_id() do
     GenServer.call(Snowflake.Generator, :machine_id)
   end
+
+  @doc """
+  Returns the machine id of the current node.
+  """
+  @spec set_machine_id(integer) :: {:ok, integer}
+  def set_machine_id(machine_id) do
+    GenServer.call(Snowflake.Generator, {:set_machine_id, machine_id})
+  end
 end
