@@ -5,10 +5,8 @@ defmodule Snowflake do
   use Application
 
   def start(_type, _args) do
-    import Supervisor.Spec
-
     children = [
-      worker(Snowflake.Generator, [Snowflake.Helper.epoch(), Snowflake.Helper.machine_id()])
+      {Snowflake.Generator, [Snowflake.Helper.epoch(), Snowflake.Helper.machine_id()]}
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one)

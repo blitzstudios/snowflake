@@ -5,7 +5,7 @@ defmodule Snowflake.Generator do
   @machine_id_overflow 1024
   @seq_overflow 4096
 
-  def start_link(epoch, machine_id) when machine_id < @machine_id_overflow do
+  def start_link([epoch, machine_id]) when machine_id < @machine_id_overflow do
     state = {epoch, ts(epoch), machine_id, 0}
     GenServer.start_link(__MODULE__, state, name: __MODULE__)
   end
