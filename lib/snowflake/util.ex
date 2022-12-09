@@ -16,11 +16,12 @@ defmodule Snowflake.Util do
   @spec first_snowflake_for_timestamp(integer) :: integer
   def first_snowflake_for_timestamp(timestamp) do
     ts = timestamp - Snowflake.Helper.epoch()
-    
-    << new_id :: unsigned-integer-size(64)>> = <<
-       ts :: unsigned-integer-size(42),
-       0 :: unsigned-integer-size(10),
-       0 :: unsigned-integer-size(12) >>
+
+    <<new_id::unsigned-integer-size(64)>> = <<
+      ts::unsigned-integer-size(42),
+      0::unsigned-integer-size(10),
+      0::unsigned-integer-size(12)
+    >>
 
     new_id
   end
@@ -61,7 +62,8 @@ defmodule Snowflake.Util do
   defp bucket_size(unit_type, units) do
     case unit_type do
       :hours -> 1000 * 60 * 60 * units
-      _ -> 1000 * 60 * 60 * 24 * units  # days is default
+      # days is default
+      _ -> 1000 * 60 * 60 * 24 * units
     end
   end
 end

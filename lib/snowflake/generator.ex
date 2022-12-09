@@ -19,8 +19,10 @@ defmodule Snowflake.Generator do
       {:error, :seq_overflow} ->
         :timer.sleep(1)
         handle_call(:next_id, from, state)
+
       {:error, :backwards_clock} ->
         {:reply, {:error, :backwards_clock}, state}
+
       {:ok, new_ts, new_seq} ->
         new_state = {epoch, new_ts, machine_id, new_seq}
         {:reply, {:ok, create_id(new_ts, machine_id, new_seq)}, new_state}
@@ -42,6 +44,7 @@ defmodule Snowflake.Generator do
           @seq_overflow -> {:error, :seq_overflow}
           next_seq -> {:ok, prev_ts, next_seq}
         end
+
       new_ts ->
         cond do
           new_ts < prev_ts -> {:error, :backwards_clock}
@@ -51,10 +54,11 @@ defmodule Snowflake.Generator do
   end
 
   defp create_id(ts, machine_id, seq) do
-    << new_id :: unsigned-integer-size(64)>> = <<
-       ts :: unsigned-integer-size(42),
-       machine_id :: unsigned-integer-size(10),
-       seq :: unsigned-integer-size(12) >>
+    <<new_id::unsigned-integer-size(64)>> = <<
+      ts::unsigned-integer-size(42),
+      machine_id::unsigned-integer-size(10),
+      seq::unsigned-integer-size(12)
+    >>
 
     new_id
   end

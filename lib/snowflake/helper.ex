@@ -40,7 +40,7 @@ defmodule Snowflake.Helper do
   defp machine_id(_id), do: machine_id(nil)
 
   defp ip_addrs() do
-    case :inet.getifaddrs do
+    case :inet.getifaddrs() do
       {:ok, ifaddrs} ->
         ifaddrs
         |> Enum.flat_map(fn {_, kwlist} ->
@@ -49,11 +49,15 @@ defmodule Snowflake.Helper do
         |> Enum.filter(&(tuple_size(elem(&1, 1)) in [4, 6]))
         |> Enum.map(fn {_, addr} ->
           case addr do
-            {a, b, c, d} -> [a, b, c, d] |> Enum.join(".")              # ipv4
-            {a, b, c, d, e, f} -> [a, b, c, d, e, f] |> Enum.join(":")  # ipv6
+            # ipv4
+            {a, b, c, d} -> [a, b, c, d] |> Enum.join(".")
+            # ipv6
+            {a, b, c, d, e, f} -> [a, b, c, d, e, f] |> Enum.join(":")
           end
         end)
-      _ -> []
+
+      _ ->
+        []
     end
   end
 
@@ -63,7 +67,7 @@ defmodule Snowflake.Helper do
   end
 
   defp fqdn() do
-    case :inet.get_rc[:domain] do
+    case :inet.get_rc()[:domain] do
       nil -> nil
       domain -> hostname() <> "." <> to_string(domain)
     end
