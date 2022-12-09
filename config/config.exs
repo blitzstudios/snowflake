@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 config :snowflake,
   nodes: ["127.0.0.1"],
